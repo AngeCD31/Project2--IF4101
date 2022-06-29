@@ -27,7 +27,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/css/bootstrap.css",
+              "src/css/nice-select.min.css",
+              "src/css/responsive.css",
+              "src/css/style.css",
+              "src/css/style.scss",
+              "src/css/style2.css"
             ],
             "scripts": []
           },
