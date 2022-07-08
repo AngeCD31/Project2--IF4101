@@ -20,6 +20,10 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting(),
 );
 
+/// <reference path="../../../typings/globals/jquery/index.d.ts" />
+
+let test:any=$("div"); 
+
 // Then we find all the tests.
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.

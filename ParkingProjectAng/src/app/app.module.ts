@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import * as $ from 'jquery';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +33,10 @@ const appRoutes: Routes = [
     component: AssistantPrincipalComponent,
     data: { title: 'Parking Assistant' }
   },
+  { path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  }
 ];
 
 
@@ -43,7 +50,10 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
