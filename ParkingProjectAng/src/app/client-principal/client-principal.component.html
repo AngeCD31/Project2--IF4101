@@ -1,0 +1,290 @@
+<div id="headerdivClient">
+    <header id="header" class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="#home">
+            <span>
+              Paspark
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item">
+                <a class="nav-link" href="#parking">Parking</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#bookings">Bookings</a>
+              </li> 
+               <li class="nav-item">
+                <a class="nav-link" onclick="LoginOut();">Login out</a>
+              </li> 
+            </ul>
+            <form class="form-inline">
+              <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+    </div>
+
+    <section id="parking" class="slider_section ">
+        <div class="container">
+          <div class="detail-box col-md-9 mx-auto px-0">
+            <h1>
+              Finding Parking Lots Made Easy
+            </h1>
+            <p id="la">
+              From this section you can select the parking lot of your preference and the available spaces will be shown.
+            </p>
+          </div>              
+            <div id="parkings" class="container">
+                <table class="table table-bordered table-hover" id="parkings-table">
+                                  
+                                  <thead>
+  
+                                      <tr>
+  
+                                          <th>
+                                              Name
+                                          </th>
+  
+                                          <th>
+                                              City
+                                          </th>
+  
+                                          <th>
+                                              Capacity
+                                          </th>                                     
+  
+                                          <th>
+                                              Action
+                                          </th>
+  
+                                      </tr>
+  
+                                  </thead>
+  
+                                  <tbody id="parking-tbody">
+  
+                                  </tbody>
+  
+                              </table>     
+            </div> 
+        </div>
+  
+        <!-- Modal -->
+                      <div id="modalParkings" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+  
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>                         
+                            </div>
+                            <div class="modal-body">
+                                <p style="color:red">Ocupado</p>
+                                <p style="color:green">Libre</p>
+                                <p style="color:Blue">Preferencial</p>
+                                <p style="color:white">Seleccionado</p>
+                                <table class="table table-bordered table-hover" id="spots-table">
+                                  
+                                 
+  
+                                  <tbody id="spots-tbody">
+  
+                                  </tbody>
+  
+                              </table>   
+                              
+                              <button data-toggle="modal" data-target="#modalGetSpot">Get Spot</button>
+  
+                            </div>
+                          </div>
+  
+                        </div>
+                      </div>
+  
+                       <!-- Modal -->
+                      <div id="modalGetSpot" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+  
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>                         
+                            </div>
+                            <div class="modal-body">
+                                <form action="">
+                                    <div class=" w3l-form-group">
+                                          <label>Vehículo:</label>
+                                          <div class="group">                  
+                                               <select id="vehicles" class="form-control" style="display: block;">
+                                                  
+                                               </select>
+                                          </div>
+                                      </div>
+                                      <div class=" w3l-form-group">
+                                          <label>Fecha:</label>
+                                          <div class="group">                  
+                                              <input id="date" type="date" class="form-control" required="" />
+                                          </div>
+                                      </div>
+                                      <div class=" w3l-form-group">
+                                          <label>Hora de entrada:</label>
+                                          <div class="group">                  
+                                              <input id="checkintime" type="time" class="form-control" required="" />
+                                          </div>
+                                      </div>
+                                      <div class=" w3l-form-group">
+                                          <label>Hora de salida:</label>
+                                          <div class="group">                  
+                                              <input id="checkouttime" type="time" class="form-control" required="" />
+                                          </div>
+                                      </div>
+                                      
+                                      <button onclick="GetTotalRate();return false">Total</button>
+                                      <button onclick="SaveBooking();return false">Save Booking</button>                                  
+                                      <label class="result" id="result"></label>
+                                  </form>                                                    
+                            </div>
+                          </div>
+  
+                        </div>
+                      </div>
+  
+      </section>
+
+      <section id="bookings" class="about_section layout_padding">
+        <div class="container">
+            <div class="detail-box col-md-9 mx-auto px-0">
+              <h1>
+                Booking Record
+              </h1>          
+            </div>              
+              <div id="bookings" class="container">
+                  <table class="table table-bordered table-hover" id="bookings-table">
+                                    
+                                    <thead>
+    
+                                        <tr>
+    
+                                            <th>
+                                                Id
+                                            </th>
+                                            <th>
+                                                Parking
+                                            </th>
+                                            <th>
+                                               Spot Number
+                                            </th>                                                
+                                            <th>
+                                                Date
+                                            </th> 
+                                            <th>
+                                                Check In Time
+                                            </th>  
+                                            <th>
+                                                Check Out Time
+                                            </th>  
+                                            <th>
+                                                Action
+                                            </th>
+    
+                                        </tr>
+    
+                                    </thead>
+    
+                                    <tbody id="bookings-tbody">
+    
+                                    </tbody>
+    
+                                </table>    
+                                
+                                 <!-- Modal -->
+                        <div id="modalUpdateBookings" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>                            
+                              </div>
+                              <div class="modal-body">                             
+                                        <form action="">
+                                             <input type="text" name="id" id="idUpdateBooking" hidden>
+                                            <div class=" w3l-form-group">
+                                                <label>Vehículo:</label>
+                                                <div class="group">                  
+                                                     <select id="vehiclesUpdateBooking" class="form-control" style="display: block;">
+                                                    
+                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class=" w3l-form-group">
+                                                <label>Fecha:</label>
+                                                <div class="group">                  
+                                                    <input id="dateUpdateBooking" type="date" class="form-control" required="" />
+                                                </div>
+                                            </div>
+                                            <div class=" w3l-form-group">
+                                                <label>Hora de entrada:</label>
+                                                <div class="group">                  
+                                                    <input id="checkintimeUpdateBooking" type="time" class="form-control" required="" />
+                                                </div>
+                                            </div>
+                                            <div class=" w3l-form-group">
+                                                <label>Hora de salida:</label>
+                                                <div class="group">                  
+                                                    <input id="checkouttimeUpdateBooking" type="time" class="form-control" required="" />
+                                                </div>
+                                            </div>
+                                       
+                                        <button onclick="UpdateBookings();return false">Update</button>      
+                                        <button onclick="Clear();return false">Cancel</button>        
+                                        <label class="result" id="result"></label>
+                                    </form>                                                              
+                              </div>
+                            </div>
+    
+                          </div>
+                        </div>
+    
+                         <!-- Modal -->
+                        <div id="modalDeleteBooking" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>                           
+                              </div>
+                              <div class="modal-body">                                                                     
+                                        <label style="color:white" id="deleteMessage">Delete booking? Non-reversible action</label> 
+                                        <div id="modalD">
+                                        </div>                            
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+              </div> 
+          </div>                   
+      </section>
+
+      <footer class="footer_section">
+        <div class="container">
+          <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved By
+            <a href="https://html.design/">Free Html Templates</a>
+          </p>
+        </div>
+      </footer>
+
+      
