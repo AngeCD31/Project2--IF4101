@@ -13,6 +13,8 @@ public class Parking {
     private int availableSpace;
     private int occupiedSpace;
 
+    public Parking(){}
+
     public Parking(String name, String city, int capacity, int availableSpace, int occupiedSpace) {
         this.name = name;
         this.city = city;

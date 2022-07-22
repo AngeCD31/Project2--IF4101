@@ -13,6 +13,7 @@ public class Vehicle {
     private String type;
     private int clientId;
 
+    public Vehicle(){}
     public Vehicle(String name, String color, String type, int clientId) {
         this.name = name;
         this.color = color;
@@ -24,9 +25,7 @@ public class Vehicle {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
 
     public String getColor() {
         return color;

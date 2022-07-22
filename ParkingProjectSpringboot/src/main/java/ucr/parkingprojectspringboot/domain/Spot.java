@@ -13,7 +13,7 @@ public class Spot {
     private String available;
     private int rateId;
 
-
+    public Spot(){}
     public Spot(int parkingId, int number, String preferential, String available, int rateId) {
         this.parkingId = parkingId;
         this.number = number;

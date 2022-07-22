@@ -19,16 +19,14 @@ public class RateController {
 
     @GetMapping("/rates")
     public List<Rate> list() {
-        //¿reglas de negocio?
-        //if...es admin
         return service.listAll();
     }
 
     @GetMapping("/rates/{id}")
     public ResponseEntity<Rate> get(@PathVariable Integer id) {
         try {
-            Rate student = service.get(id);
-            return new ResponseEntity<Rate>(student, HttpStatus.OK);
+            Rate rate = service.get(id);
+            return new ResponseEntity<Rate>(rate, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<Rate>(HttpStatus.NOT_FOUND);
         }
@@ -36,7 +34,6 @@ public class RateController {
 
     @PostMapping("/add")
     public void add(@RequestBody Rate rate) {
-        //reglas de negocio??
         service.save(rate);
     }
 

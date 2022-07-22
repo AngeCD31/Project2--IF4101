@@ -13,6 +13,7 @@ public class User {
     private String password;
     private int rolId;
 
+    public User(){}
     public User(String name, String email, String password, int rolId) {
         this.name = name;
         this.email = email;
@@ -24,9 +25,7 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
 
     public String getEmail() {
         return email;

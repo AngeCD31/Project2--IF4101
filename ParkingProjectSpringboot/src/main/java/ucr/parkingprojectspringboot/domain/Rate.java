@@ -9,9 +9,8 @@ public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private float hourRate;
-    public Rate() {
+    public Rate() {}
 
-    }
     public Rate(float hourRate) {
         this.hourRate = hourRate;
     }

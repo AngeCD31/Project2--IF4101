@@ -17,6 +17,8 @@ public class Reservation {
     private int vehicleId;
     private float totalRate;
 
+    public Reservation (){}
+
     public Reservation(int parkingId, int userId, int spotId, String date, String checkinTime, String checkoutTime, int vehicleId, float totalRate) {
         this.parkingId = parkingId;
         this.userId = userId;
