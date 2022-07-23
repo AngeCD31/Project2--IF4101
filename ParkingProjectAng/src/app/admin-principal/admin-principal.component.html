@@ -39,7 +39,7 @@
                 <a class="nav-link" href="#whyus" onclick="return false;">Users</a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="#whyus" onclick="return false;">Fee</a>
+                <a class="nav-link" href="#rate" onclick="return false;">Rate</a>
               </li> 
               <li class="nav-item">
                 <a class="nav-link" href="#whyus" onclick="return false;">Reports</a>
@@ -206,6 +206,109 @@
         </div>
       </section>
 
+      <section id="rate" name="rate" class="slider_section ">
+        <div class="container">
+          <div class="detail-box col-md-9 mx-auto px-0">
+            <div class="heading_container">
+              <h1>
+                Rates
+              </h1>
+              <p id="la">
+                In this section you can view, update and delete the rates in the system.
+              </p>
+    
+              <!-- Modal -->
+                        <div id="modalUpdateRate" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>                            
+                              </div>
+                              <div class="modal-body">                             
+                                        <form action="">
+                                             <input type="text" name="id" id="idUpdate" hidden>
+                                        
+                                        <div class=" w3l-form-group">
+                                            <label>Id:</label>
+                                            <div class="group">                  
+                                                <input type="text" name="id" id="idUpdateRol" class="form-control" placeholder="Id" required="">
+                                            </div>
+                                        </div>
+                                             
+                                        <div class=" w3l-form-group">
+                                            <label>Full name:</label>
+                                            <div class="group">                  
+                                                 <input type="text" name="name" id="nameUpdateRol" class="form-control" placeholder="Full name" required="">
+                                            </div>
+                                        </div>
+                                        
+                                       
+                                        <button onclick="">Update</button>      
+                                        <button onclick="Clear();return false">Cancel</button>        
+                                        <label class="result" id="result"></label>
+                                    </form>                                                              
+                              </div>
+                            </div>
+    
+                          </div>
+                        </div>
+    
+                         <!-- Modal -->
+                        <div id="modalDeleteRate" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>                           
+                              </div>
+                              <div class="modal-body">                                                                     
+                                        <label style="color:white" id="deleteMessage">Delete rate? Non-reversible action</label> 
+                                        <div id="modalB">
+                                        </div>                            
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+    
+            </div>
+          </div>
+    
+          <div id="rates" class="container">
+            <table class="table table-bordered table-hover" id="rates-table">
+                                    
+                <thead>
+    
+                    <tr>
+    
+                        <th>
+                            Amount
+                        </th>  
+    
+                        <th>
+                            Type
+                        </th> 
+
+                        <th>
+                          Action
+                        </th>                                              
+    
+                    </tr>
+    
+                </thead>
+    
+                <tbody id="rates-tbody">
+    
+                </tbody>
+    
+            </table>     
+          </div> 
+        
+        </div>
+      </section>
+
       <section id="rol" name="rol" class="slider_section ">
         <div class="container">
           <div class="detail-box col-md-9 mx-auto px-0">
@@ -289,7 +392,11 @@
     
                         <th>
                             Name
-                        </th>                                                 
+                        </th> 
+
+                        <th>
+                            Action
+                        </th>                                                
     
                     </tr>
     

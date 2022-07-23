@@ -19,8 +19,6 @@ public class RateController {
 
     @GetMapping("/rates")
     public List<Rate> list() {
-        //¿reglas de negocio?
-        //if...es admin
         return service.listAll();
     }
 
@@ -36,7 +34,6 @@ public class RateController {
 
     @PostMapping("/add")
     public void add(@RequestBody Rate rate) {
-        //reglas de negocio??
         service.save(rate);
     }
 

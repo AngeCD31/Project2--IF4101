@@ -8,16 +8,26 @@ public class Rate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private float hourRate;
+    private int amount;
+    private String type;
     public Rate() {
 
     }
-    public Rate(float hourRate) {
-        this.hourRate = hourRate;
+    public Rate(int amount, String type) {
+        this.amount = amount;
+        this.type = type;
     }
-    
-    public float getHourRate() {return hourRate;}
 
-    public void setHourRate(float hourRate) {this.hourRate = hourRate;}
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public float getAmount() {return amount;}
+
+    public void setAmount(int amount) {this.amount = amount;}
 
 }
