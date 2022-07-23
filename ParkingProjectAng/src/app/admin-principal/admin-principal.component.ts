@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../login/login-service';
 import { ParkingService } from '../services/parking-services';
@@ -17,6 +17,9 @@ export class AdminPrincipalComponent implements OnInit {
   parkings:any=[];
   rols:any=[];
   rates:any=[];
+  vehicles:any=[];
+  rate:any;
+  @Input() rateData = {type:'', amount:0};
 
   constructor(public rest: ParkingService, 
               public rest2: UserService,
@@ -24,12 +27,20 @@ export class AdminPrincipalComponent implements OnInit {
               public rest4: RolService,
               public rest5: RateService,
               private route: ActivatedRoute, 
-              private router: Router) { }
+              private router: Router,
+              private el: ElementRef) { }
+
+  ngAfterContentInit() {
+    var hbElement = document.createElement('btn');
+    hbElement.addEventListener('click', this.deleteRate); 
+  }
 
   ngOnInit(): void {
     this.getParkings();
     this.getRols();
     this.getRates();
+    this.getVehicles();
+    this.setTypesRate();
   }
 
   loginOut(){
@@ -84,6 +95,25 @@ export class AdminPrincipalComponent implements OnInit {
 
             $('#userroles-tbody').html(html);
   }
+
+  getVehicles(){
+    this.vehicles  = [];
+    this.rest3.get().subscribe((data:{}) => {
+        console.log(data);
+        this.vehicles = data;
+        //this.fillRolsTable();
+    });
+  }
+
+  setTypesRate(){
+    var html = '';
+    html += '<option value="ByHour">ByHour</option>';  
+    html += '<option value="ByDay">ByDay</option>';  
+    html += '<option value="ByWeek">ByWeek</option>';   
+    html += '<option value="ByMonth">ByMonth</option>'; 
+    html += '<option value="ByYear">ByYear</option>';                 
+    $('#typeAddRate').append(html);
+  }
   
   getRates(){
     this.rates  = [];
@@ -94,18 +124,59 @@ export class AdminPrincipalComponent implements OnInit {
     });
   }
 
+  getRateById(id:any){
+    this.rest5.getById(id).subscribe((data: {}) => {
+      console.log(data);
+      this.rate = data;
+        $('#amountUpdateRate').val(this.rate.amount);
+        $('#typeUpdateRate').val(this.rate.type);              
+    });     
+  }
+
   fillRatesTable(){
     var html = '';
             $.each(this.rates, function (key, item) {
               html += '<tr>';
                 html += '<td>' + item.amount + '</td>';
                 html += '<td>' + item.type + '</td>';
-                html += '<td><button data-toggle="modal" data-target="#modalUpdateRate" class="submit-btn" onclick="return GetById(\'' + item.id + '\')" id="edit">Edit</button></td>';
-                html += '<td><button data-toggle="modal" data-target="#modalDeleteRate" class="submit-btn" onclick="showWarning(\'' + item.id + '\')" id="edit">Delete</button></td>';        
+                html += '<td><button data-toggle="modal" data-target="#modalUpdateRate" (click)="getRateById(\'' + item.id + '\')">Edit</button></td>';
+                html += '<td><button id="btn">Delete</button></td>';    
                 html += '</tr>';
             });
 
             $('#rates-tbody').html(html);
   }
+
+  addRate(){
+    this.rest5.add(this.rateData).subscribe((result) => {
+      this.ngOnInit();
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  clearAddRate(){
+    $('#typeAddRate').val('');
+    $('#amountAddRate').val('');       
+  }
+
+  showWarningRate() {
+    var html = '';
+    html += '<button (click)="deleteRate()" id="form - cancel - update">Delete</button>';
+    html += '<button type="button" class="submit-btn" data-dismiss="modal">Close</button>';
+    $('#modalA').html(html);
+  }
+
+  
+
+  deleteRate(){
+    this.rest5.delete(this.route.snapshot.params['id']).subscribe( 
+      (data) =>{
+        console.log("click");
+
+        this.ngOnInit();
+
+      })
+    }
 
 }

@@ -216,7 +216,43 @@
               <p id="la">
                 In this section you can view, update and delete the rates in the system.
               </p>
-    
+              <button data-toggle="modal" data-target="#modalAddRate">Add</button>  
+              <!-- Modal -->
+                       <div id="modalAddRate" class="modal fade" role="dialog">
+                         <div class="modal-dialog">
+   
+                           <!-- Modal content-->
+                           <div class="modal-content">
+                             <div class="modal-header">
+                               <button type="button" class="close" data-dismiss="modal">&times;</button>                            
+                             </div>
+                             <div class="modal-body">                             
+                                       <form action="">                                        
+                                     <div class=" w3l-form-group">
+                                           <label>Type:</label>
+                                           <div class="group">                  
+                                            <select id="typeAddRate" name="type" [(ngModel)]="rateData.type" class="form-control" style="display: block;">             
+                                            </select>
+                                           </div>
+                                           
+                                       </div>
+                                       <div class=" w3l-form-group">
+                                           <label>Amount:</label>
+                                           <div class="group">                  
+                                               <input id="amountAddRate" name="name" [(ngModel)]="rateData.amount" class="form-control" placeholder="Amount">
+                                           </div>
+                                       </div>
+                                      
+                                       <button (click)="addRate()">Add</button>      
+                                       <button (click)="clearAddRate()">Cancel</button>        
+                                       <label class="result" id="result"></label>
+                                   </form>                                                              
+                             </div>
+                           </div>
+   
+                         </div>
+                       </div>
+
               <!-- Modal -->
                         <div id="modalUpdateRate" class="modal fade" role="dialog">
                           <div class="modal-dialog">
@@ -228,19 +264,19 @@
                               </div>
                               <div class="modal-body">                             
                                         <form action="">
-                                             <input type="text" name="id" id="idUpdate" hidden>
+                                             <input type="text" name="id" id="idUpdateRate" hidden>
                                         
                                         <div class=" w3l-form-group">
-                                            <label>Id:</label>
+                                            <label>Amount:</label>
                                             <div class="group">                  
-                                                <input type="text" name="id" id="idUpdateRol" class="form-control" placeholder="Id" required="">
+                                                <input type="text" name="id" id="amountUpdateRate" class="form-control" placeholder="Id" required="">
                                             </div>
                                         </div>
                                              
                                         <div class=" w3l-form-group">
-                                            <label>Full name:</label>
+                                            <label>Type:</label>
                                             <div class="group">                  
-                                                 <input type="text" name="name" id="nameUpdateRol" class="form-control" placeholder="Full name" required="">
+                                                 <input type="text" name="name" id="typeUpdateRate" class="form-control" placeholder="Full name" required="">
                                             </div>
                                         </div>
                                         
@@ -266,7 +302,7 @@
                               </div>
                               <div class="modal-body">                                                                     
                                         <label style="color:white" id="deleteMessage">Delete rate? Non-reversible action</label> 
-                                        <div id="modalB">
+                                        <div id="modalA">
                                         </div>                            
                               </div>
                             </div>
