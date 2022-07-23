@@ -267,17 +267,18 @@
                                              <input type="text" name="id" id="idUpdateRate" hidden>
                                         
                                         <div class=" w3l-form-group">
-                                            <label>Amount:</label>
-                                            <div class="group">                  
-                                                <input type="text" name="id" id="amountUpdateRate" class="form-control" placeholder="Id" required="">
-                                            </div>
-                                        </div>
-                                             
-                                        <div class=" w3l-form-group">
-                                            <label>Type:</label>
-                                            <div class="group">                  
-                                                 <input type="text" name="name" id="typeUpdateRate" class="form-control" placeholder="Full name" required="">
-                                            </div>
+                                          <label>Type:</label>
+                                          <div class="group">                  
+                                           <select id="typeUpdateRate" name="type" [(ngModel)]="rateData.type" class="form-control" style="display: block;">             
+                                           </select>
+                                          </div>
+                                          
+                                      </div>
+                                      <div class=" w3l-form-group">
+                                          <label>Amount:</label>
+                                          <div class="group">                  
+                                              <input id="amountUpdateRate" name="name" [(ngModel)]="rateData.amount" class="form-control" placeholder="Amount">
+                                          </div>
                                         </div>
                                         
                                        

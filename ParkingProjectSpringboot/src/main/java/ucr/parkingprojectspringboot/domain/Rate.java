@@ -8,14 +8,24 @@ public class Rate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private int amount;
     private String type;
     public Rate() {
 
     }
-    public Rate(int amount, String type) {
-        this.amount = amount;
-        this.type = type;
+    public Rate(int id, int amount, String type) {
+        this.setId(id);
+        this.setAmount(amount);
+        this.setType(type);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getType() {

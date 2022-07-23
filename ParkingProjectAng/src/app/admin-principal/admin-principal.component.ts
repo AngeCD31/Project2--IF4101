@@ -27,13 +27,7 @@ export class AdminPrincipalComponent implements OnInit {
               public rest4: RolService,
               public rest5: RateService,
               private route: ActivatedRoute, 
-              private router: Router,
-              private el: ElementRef) { }
-
-  ngAfterContentInit() {
-    var hbElement = document.createElement('btn');
-    hbElement.addEventListener('click', this.deleteRate); 
-  }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getParkings();
@@ -140,7 +134,7 @@ export class AdminPrincipalComponent implements OnInit {
                 html += '<td>' + item.amount + '</td>';
                 html += '<td>' + item.type + '</td>';
                 html += '<td><button data-toggle="modal" data-target="#modalUpdateRate" (click)="getRateById(\'' + item.id + '\')">Edit</button></td>';
-                html += '<td><button id="btn">Delete</button></td>';    
+                html += '<td><button data-toggle="modal" data-target="#modalDeleteRate" (click)="showWarningRate()">Delete</button></td>';    
                 html += '</tr>';
             });
 

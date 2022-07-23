@@ -15,21 +15,13 @@ public class RateService {
     @Autowired
     private RateRepository repository;
 
-    public List<Rate> listAll() {
-        return repository.findAll();
-    }
+    public List<Rate> listAll() {return repository.findAll();}
 
-    public void save(Rate rate) {
-        repository.save(rate);
-    }
+    public void save(Rate rate) {repository.save(rate);}
 
-    public Rate get(int id) {
-        return repository.findById(id).get();
-    }
+    public Rate get(int id) {return repository.findById(id).get();}
 
-    public void delete(int id) {
-        repository.deleteById(id);
-    }
+    public void delete(int id) {repository.deleteById(id);}
 
 
 
