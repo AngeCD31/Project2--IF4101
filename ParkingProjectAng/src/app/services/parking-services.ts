@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-const endpoint = 'https://localhost:7131/api/';
+const endpoint = 'http://localhost:8081/api/';
 const httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -22,23 +22,23 @@ export class ParkingService {
 
   get(): Observable<any> {
 
-    return this.http.get(endpoint+'Parkings',httpOptions)
+    //return this.http.get(endpoint+'Parkings',httpOptions)
+    return this.http.get(endpoint + 'parking/parkings').pipe(catchError(this.handleError<any>('list parkings')));
 
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(endpoint+'Parkings/'+id,httpOptions)
+    return this.http.delete(endpoint+'parking/delete/'+id,httpOptions)
     .pipe(
-      catchError(this.handleError('deleteParking'))
-    );
+      catchError(this.handleError('deleteRate')));
   }
 
   add(parking: any){
-    return this.http.post(endpoint+'Parkings/', parking, httpOptions)
+    return this.http.post(endpoint+'parking/add', parking, httpOptions)
   }
 
   getById(id:any): Observable<any> {
-    return this.http.get(endpoint+'Parkings/'+id,httpOptions)
+    return this.http.get(endpoint+'parking/update/'+id,httpOptions)
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

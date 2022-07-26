@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-const endpoint = 'https://localhost:7131/api/';
+const endpoint = 'http://localhost:8081/api/';
 const httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -22,23 +22,23 @@ export class VehicleService {
 
   get(): Observable<any> {
 
-    return this.http.get(endpoint+'Vehicles',httpOptions)
+    //return this.http.get(endpoint+'Vehicles',httpOptions)
+    return this.http.get(endpoint + 'vehicle/vehicles').pipe(catchError(this.handleError<any>('list vehicles')));
 
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(endpoint+'Vehicles/'+id,httpOptions)
+    return this.http.delete(endpoint+'vehicle/delete/'+id,httpOptions)
     .pipe(
-      catchError(this.handleError('deleteVehicle'))
-    );
+      catchError(this.handleError('deleteVehicle')));
   }
 
   add(vehicle: any){
-    return this.http.post(endpoint+'Vehicles/', vehicle, httpOptions)
+    return this.http.post(endpoint+'vehicle/add/', vehicle, httpOptions)
   }
 
   getById(id:any): Observable<any> {
-    return this.http.get(endpoint+'Vehicles/'+id,httpOptions)
+    return this.http.post(endpoint+'vehicle/update/'+id,httpOptions)
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

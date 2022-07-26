@@ -7,19 +7,33 @@ import javax.persistence.*;
 public class Spot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int Id;
     private int parkingId;
     private int number;
     private String preferential;
     private String available;
     private int rateId;
 
-    public Spot(){}
-    public Spot(int parkingId, int number, String preferential, String available, int rateId) {
+
+    public Spot(int id, int parkingId, int number, String preferential, String available, int rateId) {
+        this.Id = id;
         this.parkingId = parkingId;
         this.number = number;
         this.preferential = preferential;
         this.available = available;
         this.rateId = rateId;
+    }
+
+    public Spot() {
+
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public int getParkingId() {return parkingId;}

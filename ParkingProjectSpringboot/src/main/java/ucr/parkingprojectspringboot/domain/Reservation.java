@@ -8,6 +8,8 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private int Id;
     private int parkingId;
     private int userId;
     private int spotId;
@@ -17,9 +19,8 @@ public class Reservation {
     private int vehicleId;
     private float totalRate;
 
-    public Reservation (){}
-
-    public Reservation(int parkingId, int userId, int spotId, String date, String checkinTime, String checkoutTime, int vehicleId, float totalRate) {
+    public Reservation(int id, int parkingId, int userId, int spotId, String date, String checkinTime, String checkoutTime, int vehicleId, float totalRate) {
+        this.Id = id;
         this.parkingId = parkingId;
         this.userId = userId;
         this.spotId = spotId;
@@ -28,6 +29,18 @@ public class Reservation {
         this.checkoutTime = checkoutTime;
         this.vehicleId = vehicleId;
         this.totalRate = totalRate;
+    }
+
+    public Reservation() {
+
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public int getParkingId() {return parkingId;}

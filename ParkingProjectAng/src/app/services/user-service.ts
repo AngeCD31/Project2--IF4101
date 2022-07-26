@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-const endpoint = 'https://localhost:7131/api/';
+const endpoint = 'http://localhost:8081/api/';
 const httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -22,23 +22,23 @@ export class UserService {
 
   get(): Observable<any> {
 
-    return this.http.get(endpoint+'Users',httpOptions)
+    //return this.http.get(endpoint+'Users',httpOptions)
+    return this.http.get(endpoint + 'user/users').pipe(catchError(this.handleError<any>('list users')));
 
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(endpoint+'Users/'+id,httpOptions)
+    return this.http.delete(endpoint+'user/delete/'+id,httpOptions)
     .pipe(
-      catchError(this.handleError('deleteUser'))
-    );
+      catchError(this.handleError('deleteUser')));
   }
 
   add(user: any){
-    return this.http.post(endpoint+'Users/', user, httpOptions)
+    return this.http.post(endpoint+'user/add/', user, httpOptions)
   }
 
   getById(id:any): Observable<any> {
-    return this.http.get(endpoint+'Users/'+id,httpOptions)
+    return this.http.get(endpoint+'user/update/'+id,httpOptions)
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

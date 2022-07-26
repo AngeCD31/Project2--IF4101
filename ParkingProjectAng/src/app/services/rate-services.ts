@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-const endpoint = 'https://localhost:7131/api/';
+const endpoint = 'http://localhost:8081/api/';
 const httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -22,23 +22,23 @@ export class RateService {
 
   get(): Observable<any> {
 
-    return this.http.get(endpoint+'Rates',httpOptions)
-
+    //return this.http.get(endpoint+'rate/rates',httpOptions)
+    return this.http.get(endpoint + 'rate/rates').pipe(catchError(this.handleError<any>('list rates')));
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(endpoint+'Rates/'+id,httpOptions)
+    //return this.http.delete(endpoint+'rate/delete/'+id,httpOptions).pipe(catchError(this.handleError('deleteRate')));
+    return this.http.delete(endpoint+'rate/delete/'+id,httpOptions)
     .pipe(
-      catchError(this.handleError('deleteRate'))
-    );
+      catchError(this.handleError('deleteRate')));
   }
 
   add(rate: any){
-    return this.http.post(endpoint+'Rates/', rate, httpOptions)
+    return this.http.post(endpoint+'rate/add', rate, httpOptions)
   }
 
   getById(id:any): Observable<any> {
-    return this.http.get(endpoint+'Rates/'+id,httpOptions)
+    return this.http.get(endpoint+'rate/update/'+id,httpOptions)
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

@@ -39,7 +39,7 @@
                 <a class="nav-link" href="#whyus" onclick="return false;">Users</a>
               </li> 
               <li class="nav-item">
-                <a class="nav-link" href="#whyus" onclick="return false;">Fee</a>
+                <a class="nav-link" href="#rate" onclick="return false;">Rate</a>
               </li> 
               <li class="nav-item">
                 <a class="nav-link" href="#whyus" onclick="return false;">Reports</a>
@@ -206,6 +206,146 @@
         </div>
       </section>
 
+      <section id="rate" name="rate" class="slider_section ">
+        <div class="container">
+          <div class="detail-box col-md-9 mx-auto px-0">
+            <div class="heading_container">
+              <h1>
+                Rates
+              </h1>
+              <p id="la">
+                In this section you can view, update and delete the rates in the system.
+              </p>
+              <button data-toggle="modal" data-target="#modalAddRate">Add</button>  
+              <!-- Modal -->
+                       <div id="modalAddRate" class="modal fade" role="dialog">
+                         <div class="modal-dialog">
+   
+                           <!-- Modal content-->
+                           <div class="modal-content">
+                             <div class="modal-header">
+                               <button type="button" class="close" data-dismiss="modal">&times;</button>                            
+                             </div>
+                             <div class="modal-body">                             
+                                       <form action="">                                        
+                                     <div class=" w3l-form-group">
+                                           <label>Type:</label>
+                                           <div class="group">                  
+                                            <select id="typeAddRate" name="type" [(ngModel)]="rateData.type" class="form-control" style="display: block;">             
+                                            </select>
+                                           </div>
+                                           
+                                       </div>
+                                       <div class=" w3l-form-group">
+                                           <label>Amount:</label>
+                                           <div class="group">                  
+                                               <input id="amountAddRate" name="name" [(ngModel)]="rateData.amount" class="form-control" placeholder="Amount">
+                                           </div>
+                                       </div>
+                                      
+                                       <button (click)="addRate()">Add</button>      
+                                       <button (click)="clearAddRate()">Cancel</button>        
+                                       <label class="result" id="result"></label>
+                                   </form>                                                              
+                             </div>
+                           </div>
+   
+                         </div>
+                       </div>
+
+              <!-- Modal -->
+                        <div id="modalUpdateRate" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>                            
+                              </div>
+                              <div class="modal-body">                             
+                                        <form action="">
+                                             <input type="text" name="id" id="idUpdateRate" hidden>
+                                        
+                                        <div class=" w3l-form-group">
+                                          <label>Type:</label>
+                                          <div class="group">                  
+                                           <select id="typeUpdateRate" name="type" [(ngModel)]="rateData.type" class="form-control" style="display: block;">             
+                                           </select>
+                                          </div>
+                                          
+                                      </div>
+                                      <div class=" w3l-form-group">
+                                          <label>Amount:</label>
+                                          <div class="group">                  
+                                              <input id="amountUpdateRate" name="name" [(ngModel)]="rateData.amount" class="form-control" placeholder="Amount">
+                                          </div>
+                                        </div>
+                                        
+                                       
+                                        <button onclick="">Update</button>      
+                                        <button onclick="Clear();return false">Cancel</button>        
+                                        <label class="result" id="result"></label>
+                                    </form>                                                              
+                              </div>
+                            </div>
+    
+                          </div>
+                        </div>
+    
+                         <!-- Modal -->
+                        <div id="modalDeleteRate" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>                           
+                              </div>
+                              <div class="modal-body">                                                                     
+                                        <label style="color:white" id="deleteMessage">Delete rate? Non-reversible action</label> 
+                                        <div id="modalA">
+                                        </div>                            
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+    
+            </div>
+          </div>
+    
+          <div id="rates" class="container">
+            <table class="table table-bordered table-hover" id="rates-table">
+                                    
+                <thead>
+    
+                    <tr>
+    
+                        <th>
+                            Amount
+                        </th>  
+    
+                        <th>
+                            Type
+                        </th> 
+
+                        <th>
+                          Action
+                        </th>                                              
+    
+                    </tr>
+    
+                </thead>
+    
+                <tbody id="rates-tbody">
+    
+                </tbody>
+    
+            </table>     
+          </div> 
+        
+        </div>
+      </section>
+
       <section id="rol" name="rol" class="slider_section ">
         <div class="container">
           <div class="detail-box col-md-9 mx-auto px-0">
@@ -289,7 +429,11 @@
     
                         <th>
                             Name
-                        </th>                                                 
+                        </th> 
+
+                        <th>
+                            Action
+                        </th>                                                
     
                     </tr>
     

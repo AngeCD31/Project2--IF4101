@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-const endpoint = 'https://localhost:7131/api/';
+const endpoint = 'http://localhost:8081/api/';
 const httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -22,23 +22,23 @@ export class RolService {
 
   get(): Observable<any> {
 
-    return this.http.get(endpoint+'Rols',httpOptions)
+    //return this.http.get(endpoint+'Rols',httpOptions)
+    return this.http.get(endpoint + 'rol/roles').pipe(catchError(this.handleError<any>('list roles')));
 
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(endpoint+'Rols/'+id,httpOptions)
+    return this.http.delete(endpoint+'rol/delete/'+id,httpOptions)
     .pipe(
-      catchError(this.handleError('deleteRol'))
-    );
+      catchError(this.handleError('deleteRol')));
   }
 
   add(rol: any){
-    return this.http.post(endpoint+'Rols/', rol, httpOptions)
+    return this.http.post(endpoint+'rol/add/', rol, httpOptions)
   }
 
   getById(id:any): Observable<any> {
-    return this.http.get(endpoint+'Rols/'+id,httpOptions)
+    return this.http.get(endpoint+'rol/update/'+id,httpOptions)
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

@@ -7,20 +7,33 @@ import javax.persistence.*;
 public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private int Id;
     private String name;
     private String city;
     private int capacity;
     private int availableSpace;
     private int occupiedSpace;
 
-    public Parking(){}
-
-    public Parking(String name, String city, int capacity, int availableSpace, int occupiedSpace) {
+    public Parking(int id, String name, String city, int capacity, int availableSpace, int occupiedSpace) {
         this.name = name;
         this.city = city;
         this.capacity = capacity;
         this.availableSpace = availableSpace;
         this.occupiedSpace = occupiedSpace;
+        this.Id = id;
+    }
+
+    public Parking() {
+
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getName() {return name;}

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-const endpoint = 'https://localhost:7131/api/';
+const endpoint = 'http://localhost:8081/api/';
 const httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -22,23 +22,23 @@ export class SpotService {
 
   get(): Observable<any> {
 
-    return this.http.get(endpoint+'Spots',httpOptions)
+    //return this.http.get(endpoint+'Spots',httpOptions)
+    return this.http.get(endpoint + 'spot/spots').pipe(catchError(this.handleError<any>('list spots')));
 
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(endpoint+'Spots/'+id,httpOptions)
+    return this.http.delete(endpoint+'spot/delete/'+id,httpOptions)
     .pipe(
-      catchError(this.handleError('deleteSpot'))
-    );
+      catchError(this.handleError('deleteRol')));
   }
 
   add(spot: any){
-    return this.http.post(endpoint+'Spots/', spot, httpOptions)
+    return this.http.post(endpoint+'spot/add/', spot, httpOptions)
   }
 
   getById(id:any): Observable<any> {
-    return this.http.get(endpoint+'Spots/'+id,httpOptions)
+    return this.http.get(endpoint+'spot/update/'+id,httpOptions)
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
