@@ -22,6 +22,10 @@ public class Spot {
         this.rateId = rateId;
     }
 
+    public Spot() {
+
+    }
+
     public int getParkingId() {return parkingId;}
     public void setParkingId(int parkingId) {this.parkingId = parkingId;}
     public int getNumber() {return number;}

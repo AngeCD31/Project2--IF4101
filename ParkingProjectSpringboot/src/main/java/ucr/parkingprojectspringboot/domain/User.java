@@ -20,6 +20,10 @@ public class User {
         this.rolId = rolId;
     }
 
+    public User() {
+
+    }
+
     public String getName() {
         return name;
     }

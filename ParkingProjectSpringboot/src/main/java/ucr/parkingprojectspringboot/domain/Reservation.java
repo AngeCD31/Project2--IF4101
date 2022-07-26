@@ -28,6 +28,10 @@ public class Reservation {
         this.totalRate = totalRate;
     }
 
+    public Reservation() {
+
+    }
+
     public int getParkingId() {return parkingId;}
 
     public void setParkingId(int parkingId) {this.parkingId = parkingId;}

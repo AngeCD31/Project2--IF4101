@@ -20,6 +20,10 @@ public class Vehicle {
         this.clientId = clientId;
     }
 
+    public Vehicle() {
+
+    }
+
     public String getName() {
         return name;
     }

@@ -25,8 +25,8 @@ public class RateController {
     @GetMapping("/rates/{id}")
     public ResponseEntity<Rate> get(@PathVariable Integer id) {
         try {
-            Rate student = service.get(id);
-            return new ResponseEntity<Rate>(student, HttpStatus.OK);
+            Rate rate = service.get(id);
+            return new ResponseEntity<Rate>(rate, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<Rate>(HttpStatus.NOT_FOUND);
         }
