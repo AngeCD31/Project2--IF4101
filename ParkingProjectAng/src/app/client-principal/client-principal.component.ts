@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../login/login-service';
 import { ParkingService } from '../services/parking-services';
 import { ReservationService } from '../services/reservation-service';
+import { SpotService } from '../services/spot-service';
 
 @Component({
   selector: 'app-client-principal',
@@ -13,8 +14,11 @@ export class ClientPrincipalComponent implements OnInit {
 
   parkings:any=[];
   bookings:any=[];
+  spots:any=[];
 
-  constructor(public rest: ParkingService, public rest2: ReservationService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public rest: ParkingService, public rest2: ReservationService,
+              public rest3: SpotService,
+              private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getParkings();
@@ -31,23 +35,59 @@ export class ClientPrincipalComponent implements OnInit {
     this.rest.get().subscribe((data:{}) => {
         console.log(data);
         this.parkings = data;
-        this.fillParkingsTable();
     });
   }
 
-  fillParkingsTable(){
-    var html = '';
-            $.each(this.parkings, function (key, item) {
-                html += '<tr>';
-                html += '<td>' + item.name + '</td>';
-                html += '<td>' + item.city + '</td>';
-                html += '<td>' + item.availableSpace + '</td>';                
+  getSpots(id:any){
+    this.spots  = [];
+    this.rest3.getByParking(id).subscribe((data: {}) => {
+        console.log(data);
+        this.spots = data;
+        this.fillSpotsTable();
+    });
+  }
 
-                html += '<td><button data-toggle="modal" data-target="#modalParkings" onclick="return GetSpots(\'' + item.name + '\');" id="details">Details</button></td>';
-                html += '</tr>';
-            });
+  fillSpotsTable(){
+    var html = '<tr>'; 
+    var id = 1;
 
-            $('#parking-tbody').html(html);
+    for (var i = 0; i < this.spots.length; i++) {
+        while (id <= 3) {
+            if (i < this.spots.length) {  
+
+                let text1 = "selectedSpot";
+                let text2 = this.spots[i].id;
+                let result1 = text1.concat(text2);
+                //reservation.parkingId = spots[i].parking.id;
+                //reservation.spotRate = spots[i].rate.hourRate;
+
+                switch (this.spots[i].available) {
+                    case "Yes":
+                        switch (this.spots[i].preferential) {
+                            case "Yes":                                       
+                                html += '<td><button id="' + result1 + '"  style="background-color:blue;" onclick="return SaveSpot(\'' + this.spots[i].id + '\');"> </button></td>';
+                                break;
+                            case "No":
+                                html += '<td><button id="' + result1 + '" style="background-color:green;" onclick="return SaveSpot(\'' + this.spots[i].id + '\');"> </button></td>';
+                                break;
+                        }
+                        break;
+                    case "No":
+                        html += '<td><button style=background-color:red;> </button></td>';
+                        break;
+                }
+            }
+            if (id < 3) { 
+                i++;
+            }
+            id++;
+        }
+        html += '</tr>';
+        html += '<tr>'; 
+        id = 1;
+    }
+
+    $('#spots-tbody').html(html);
   }
 
   getBookings(){
@@ -55,27 +95,7 @@ export class ClientPrincipalComponent implements OnInit {
     this.rest2.get().subscribe((data:{}) => {
         console.log(data);
         this.bookings = data;
-        this.fillBookingsTable();
     });
-  }
-
-  fillBookingsTable(){
-    var html = '';
-            $.each(this.bookings, function (key, item) {
-              html += '<tr>';
-              html += '<td>' + item.id + '</td>';
-              html += '<td>' + item.parking.name + '</td>';
-              html += '<td>' + item.spot.number + '</td>';
-              html += '<td>' + item.date + '</td>';
-              html += '<td>' + item.checkinTime + '</td>';
-              html += '<td>' + item.checkoutTime + '</td>';
-              html += '<td><button data-toggle="modal" data-target="#modalUpdateBookings" class="submit-btn" onclick="return GetByIdBooking(\'' + item.id + '\')" id="edit">Edit</button></td>';
-              html += '<td><button data-toggle="modal" data-target="#modalDeleteBooking" class="submit-btn" onclick="showWarningBooking(\'' + item.id + '\')" id="edit">Delete</button></td>';
-              html += '</tr>';
-          });
-
-          $('#bookings-tbody').html(html);
-        
   }
 
 }

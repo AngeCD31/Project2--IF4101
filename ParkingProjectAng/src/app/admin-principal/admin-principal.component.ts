@@ -46,25 +46,7 @@ export class AdminPrincipalComponent implements OnInit {
     this.rest.get().subscribe((data:{}) => {
         console.log(data);
         this.parkings = data;
-        this.fillParkingsTable();
     });
-  }
-
-  fillParkingsTable(){
-    var html = '';
-            $.each(this.parkings, function (key, item) {
-              html += '<tr>';
-              html += '<td>' + item.name + '</td>';
-              html += '<td>' + item.city + '</td>';
-              html += '<td>' + item.availableSpace + '</td>';
-
-              html += '<td><button data-toggle="modal" data-target="#modalUpdate" class="submit-btn" onclick="return GetById(\'' + item.id + '\')" id="edit">Edit</button></td>';
-              html += '<td><button data-toggle="modal" data-target="#modalDelete" class="submit-btn" onclick="showWarning(\'' + item.id + '\')" id="edit">Delete</button></td>';
-              html += '</tr>';
-
-          });
-
-          $("#parkingadmin-tbody").html(html);
   }
 
   getRols(){
@@ -72,22 +54,7 @@ export class AdminPrincipalComponent implements OnInit {
     this.rest4.get().subscribe((data:{}) => {
         console.log(data);
         this.rols = data;
-        this.fillRolsTable();
     });
-  }
-
-  fillRolsTable(){
-    var html = '';
-            $.each(this.rols, function (key, item) {
-              html += '<tr>';
-                html += '<td>' + item.idRol + '</td>';
-                html += '<td>' + item.name + '</td>';
-                html += '<td><button data-toggle="modal" data-target="#modalUpdateRol" class="submit-btn" onclick="return GetById(\'' + item.id + '\')" id="edit">Edit</button></td>';
-                html += '<td><button data-toggle="modal" data-target="#modalDeleteRol" class="submit-btn" onclick="showWarning(\'' + item.id + '\')" id="edit">Delete</button></td>';
-                html += '</tr>';
-            });
-
-            $('#userroles-tbody').html(html);
   }
 
   getVehicles(){
@@ -95,7 +62,6 @@ export class AdminPrincipalComponent implements OnInit {
     this.rest3.get().subscribe((data:{}) => {
         console.log(data);
         this.vehicles = data;
-        //this.fillRolsTable();
     });
   }
 
@@ -114,7 +80,6 @@ export class AdminPrincipalComponent implements OnInit {
     this.rest5.get().subscribe((data:{}) => {
         console.log(data);
         this.rates = data;
-        this.fillRatesTable();
     });
   }
 
@@ -125,20 +90,6 @@ export class AdminPrincipalComponent implements OnInit {
         $('#amountUpdateRate').val(this.rate.amount);
         $('#typeUpdateRate').val(this.rate.type);              
     });     
-  }
-
-  fillRatesTable(){
-    var html = '';
-            $.each(this.rates, function (key, item) {
-              html += '<tr>';
-                html += '<td>' + item.amount + '</td>';
-                html += '<td>' + item.type + '</td>';
-                html += '<td><button data-toggle="modal" data-target="#modalUpdateRate" (click)="getRateById(\'' + item.id + '\')">Edit</button></td>';
-                html += '<td><button data-toggle="modal" data-target="#modalDeleteRate" (click)="showWarningRate()">Delete</button></td>';    
-                html += '</tr>';
-            });
-
-            $('#rates-tbody').html(html);
   }
 
   addRate(){
@@ -154,17 +105,8 @@ export class AdminPrincipalComponent implements OnInit {
     $('#amountAddRate').val('');       
   }
 
-  showWarningRate() {
-    var html = '';
-    html += '<button (click)="deleteRate()" id="form - cancel - update">Delete</button>';
-    html += '<button type="button" class="submit-btn" data-dismiss="modal">Close</button>';
-    $('#modalA').html(html);
-  }
-
-  
-
-  deleteRate(){
-    this.rest5.delete(this.route.snapshot.params['id']).subscribe( 
+  deleteRate(id:any){
+    this.rest5.delete(id).subscribe( 
       (data) =>{
         console.log("click");
 
@@ -172,5 +114,15 @@ export class AdminPrincipalComponent implements OnInit {
 
       })
     }
+
+    deleteRol(id:any){
+      this.rest4.delete(id).subscribe( 
+        (data) =>{
+          console.log("click");
+  
+          this.ngOnInit();
+  
+        })
+      }
 
 }

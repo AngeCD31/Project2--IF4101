@@ -55,6 +55,7 @@
                                           <th>
                                               Name
                                           </th>
+                                          
   
                                           <th>
                                               City
@@ -69,6 +70,21 @@
                                           </th>
   
                                       </tr>
+
+                                      <tr *ngFor="let p of parkings; let i=index;">
+                                        <td>
+                                          {{p.name}}
+                                        </td>
+                                        <td>
+                                          {{p.city}}
+                                        </td>
+                                        <td>
+                                          {{p.capacity}}
+                                        </td>
+                                        <td>
+                                          <button data-toggle="modal" data-target="#modalParkings" class="submit-btn" (click)="getSpots(p.id)">Details</button>
+                                        </td>
+                                      </tr> 
   
                                   </thead>
   
@@ -197,8 +213,34 @@
                                             <th>
                                                 Action
                                             </th>
+                                          </tr>
+
+                                            <tr *ngFor="let b of bookings; let i=index;">
+                                              <td>
+                                                {{b.id}}
+                                              </td>
+                                              <td>
+                                                {{b.parking.name}}
+                                              </td>
+                                              <td>
+                                                {{b.spot.number}}
+                                              </td>
+                                              <td>
+                                                {{b.date}}
+                                              </td>
+                                              <td>
+                                                {{b.checkinTime}}
+                                              </td>
+                                              <td>
+                                                {{b.checkoutTime}}
+                                              </td>
+                                              <td>
+                                                <button data-toggle="modal" data-target="#modalUpdateBookings" class="submit-btn" (click)="getSpots(b.id)">Edit</button>
+                                                <button data-toggle="modal" data-target="#modalDeleteBooking" class="submit-btn" (click)="getSpots(b.id)">Delete</button>
+                                              </td>
+                                            </tr> 
     
-                                        </tr>
+                                        
     
                                     </thead>
     

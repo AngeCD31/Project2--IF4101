@@ -193,6 +193,22 @@
                         </th>
     
                     </tr>
+
+                    <tr *ngFor="let p of parkings; let i=index;">
+                      <td>
+                        {{p.name}}
+                      </td>
+                      <td>
+                        {{p.city}}
+                      </td>
+                      <td>
+                        {{p.capacity}}
+                      </td>
+                      <td>
+                        <button data-toggle="modal" data-target="#modalUpdate" class="submit-btn">Edit</button>
+                        <button data-toggle="modal" data-target="#modalDelete" class="submit-btn">Delete</button>
+                      </td>
+                    </tr> 
     
                 </thead>
     
@@ -291,25 +307,6 @@
     
                           </div>
                         </div>
-    
-                         <!-- Modal -->
-                        <div id="modalDeleteRate" class="modal fade" role="dialog">
-                          <div class="modal-dialog">
-    
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>                           
-                              </div>
-                              <div class="modal-body">                                                                     
-                                        <label style="color:white" id="deleteMessage">Delete rate? Non-reversible action</label> 
-                                        <div id="modalA">
-                                        </div>                            
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-    
             </div>
           </div>
     
@@ -333,6 +330,19 @@
                         </th>                                              
     
                     </tr>
+
+                    <tr *ngFor="let r of rates; let i=index;">
+                      <td>
+                        {{r.amount}}
+                      </td>
+                      <td>
+                        {{r.type}}
+                      </td>
+                      <td>
+                        <button data-toggle="modal" data-target="#modalUpdateRate" class="submit-btn" (click)="getRateById(r.id)">Edit</button>
+                        <button data-toggle="modal" data-target="#modalDeleteRate" class="submit-btn" (click)="deleteRate(r.id)">Delete</button>
+                      </td>
+                    </tr> 
     
                 </thead>
     
@@ -395,24 +405,6 @@
                           </div>
                         </div>
     
-                         <!-- Modal -->
-                        <div id="modalDeleteRol" class="modal fade" role="dialog">
-                          <div class="modal-dialog">
-    
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>                           
-                              </div>
-                              <div class="modal-body">                                                                     
-                                        <label style="color:white" id="deleteMessage">Delete role? Non-reversible action</label> 
-                                        <div id="modalB">
-                                        </div>                            
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-    
             </div>
           </div>
     
@@ -436,6 +428,19 @@
                         </th>                                                
     
                     </tr>
+
+                    <tr *ngFor="let r of rols; let i=index;">
+                      <td>
+                        {{r.idRol}}
+                      </td>
+                      <td>
+                        {{r.name}}
+                      </td>
+                      <td>
+                        <button data-toggle="modal" data-target="#modalUpdateRol" class="submit-btn" (click)="getRateById(r.id)">Edit</button>
+                        <button data-toggle="modal" data-target="#modalDeleteRate" class="submit-btn" (click)="deleteRate(r.id)">Delete</button>
+                      </td>
+                    </tr> 
     
                 </thead>
     

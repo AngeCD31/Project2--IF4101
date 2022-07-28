@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ucr.parkingprojectspringboot.domain.Spot;
 import ucr.parkingprojectspringboot.service.SpotService;
 
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -31,6 +30,18 @@ public class SpotController {
         } catch (NoSuchElementException e) {
             return new ResponseEntity<Spot>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/spots/getByParking/{id}")
+    public List<Spot> getByParking(@PathVariable Integer id) {
+            List<Spot> allSpots = service.listAll();
+            ArrayList<Spot> result = new ArrayList<Spot>();
+        for (int i = 0; i < allSpots.size(); i++) {
+            if (allSpots.get(i).getParkingId() == id) {
+                result.add(allSpots.get(i));
+            }
+        }
+        return result;
     }
 
     @PostMapping("/add")
