@@ -27,6 +27,12 @@ public class UserService {
         return repository.findById(id).get();
     }
 
+    public User getByName(String name) {
+        List<User> users = repository.findByName(name);
+        return users.get(0);
+
+    }
+
     public void delete(int id) {
         repository.deleteById(id);
     }

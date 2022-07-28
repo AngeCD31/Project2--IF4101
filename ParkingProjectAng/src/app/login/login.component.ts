@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   isValidUser(){
     if (typeof(this.user) !== 'undefined') {
       if(this.user.password==this.userData.password){
-        switch (this.user.rolId) {
+        switch (this.user.rol) {
           case 1:
             this.adminPrincipal();
             break;

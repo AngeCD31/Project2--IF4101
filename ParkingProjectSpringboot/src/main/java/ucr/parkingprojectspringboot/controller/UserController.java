@@ -33,6 +33,16 @@ public class UserController {
         }
     }
 
+    @GetMapping("/getByName/{name}")
+    public ResponseEntity<User> getByName(@PathVariable String name) {
+        try {
+            User user = service.getByName(name);
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/add")
     public void add(@RequestBody User user) {
         service.save(user);

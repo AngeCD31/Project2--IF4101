@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-const endpoint = 'https://localhost:7131/api/';
+const endpoint = 'http://localhost:8081/api/';
 const httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -20,14 +20,29 @@ export class LoginService {
 
   }
 
-  getUsers(): Observable<any> {
+  get(): Observable<any> {
 
-    return this.http.get(endpoint+'Users',httpOptions)
+    //return this.http.get(endpoint+'Users',httpOptions)
+    return this.http.get(endpoint + 'user/users').pipe(catchError(this.handleError<any>('list users')));
 
   }
 
+  delete(id: number): Observable<any> {
+    return this.http.delete(endpoint+'user/delete/'+id,httpOptions)
+    .pipe(
+      catchError(this.handleError('deleteUser')));
+  }
+
+  add(user: any){
+    return this.http.post(endpoint+'user/add/', user, httpOptions)
+  }
+
+  getById(id:any): Observable<any> {
+    return this.http.get(endpoint+'user/update/'+id,httpOptions)
+  }
+
   getUser(name:any): Observable<any> {
-    return this.http.get(endpoint+'Users/'+name,httpOptions)
+    return this.http.get(endpoint+'user/getByName/'+name,httpOptions)
     .pipe(
       catchError(this.handleError('getUser'))
     );
@@ -52,3 +67,4 @@ export class LoginService {
 
 }
 
+ 

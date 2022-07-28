@@ -12,8 +12,8 @@ public class Rol {
     private int IdRol;
     private String name;
 
-    public Rol(int id, String name) {
-        this.IdRol = id;
+    public Rol(int idRol, String name) {
+        this.IdRol = idRol;
         this.name = name;
     }
 
