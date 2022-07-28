@@ -38,7 +38,9 @@ export class SpotService {
   }
 
   getById(id:any): Observable<any> {
-    return this.http.get(endpoint+'spot/update/'+id,httpOptions)
+    return this.http.get(endpoint+'spot/spots/'+id,httpOptions).pipe(
+      catchError(this.handleError('getSpot'))
+    );
   }
 
   getByParking(id:any): Observable<any> {

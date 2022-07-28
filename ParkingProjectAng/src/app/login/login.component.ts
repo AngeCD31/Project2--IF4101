@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   isValidUser(){
     if (typeof(this.user) !== 'undefined') {
       if(this.user.password==this.userData.password){
+        this.rest.setSession(this.user.name, this.user.id);
         switch (this.user.rol) {
           case 1:
             this.adminPrincipal();

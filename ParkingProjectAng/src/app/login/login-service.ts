@@ -14,6 +14,8 @@ const httpOptions = {
 })
 export class LoginService {
 
+  session = {userName: '', userId: ''};
+
   constructor(private http: HttpClient) { 
 
 
@@ -47,6 +49,17 @@ export class LoginService {
       catchError(this.handleError('getUser'))
     );
   }
+
+  setSession(name:any, id:any){
+    this.session.userName=name;
+    this.session.userId=id;
+  }
+
+  getSession(): any{
+    return this.session;
+  }
+
+
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

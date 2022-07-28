@@ -78,27 +78,28 @@
                               </div>
                               <div class="modal-body">                             
                                         <form action="">                                        
-                                      <div class=" w3l-form-group">
+                                          <div class=" w3l-form-group">
                                             <label>Name:</label>
                                             <div class="group">                  
-                                                 <input type="text" name="name" id="nameAddParking" class="form-control" placeholder="Name" required="">
+                                                 <input [(ngModel)]="parkingData.name" type="text" name="name" id="nameAddParking" class="form-control" placeholder="Name">
+                              
                                             </div>
                                         </div>
                                         <div class=" w3l-form-group">
                                             <label>City:</label>
                                             <div class="group">                  
-                                                <input type="text" name="city" id="cityAddParking" class="form-control" placeholder="City" required="">
+                                                <input [(ngModel)]="parkingData.city" type="text" name="city" id="cityAddParking" class="form-control" placeholder="City">
                                             </div>
                                         </div>
                                         <div class=" w3l-form-group">
                                             <label>Capacity:</label>
                                             <div class="group">                  
-                                                <input type="text" name="city" id="capacityAddParking" class="form-control" placeholder="Capacity" required="">
+                                                <input [(ngModel)]="parkingData.capacity" type="text" name="capacity" id="capacityAddParking" class="form-control" placeholder="Capacity">
                                             </div>
                                         </div>
                                        
-                                        <button onclick="AddParking();return false">Add</button>      
-                                        <button onclick="Clear();return false">Cancel</button>        
+                                        <button (click)="addParking()">Add</button>      
+                                        <button (click)="clearAddParking()">Cancel</button>        
                                         <label class="result" id="result"></label>
                                     </form>                                                              
                               </div>
@@ -205,8 +206,8 @@
                         {{p.capacity}}
                       </td>
                       <td>
-                        <button data-toggle="modal" data-target="#modalUpdate" class="submit-btn">Edit</button>
-                        <button data-toggle="modal" data-target="#modalDelete" class="submit-btn">Delete</button>
+                        <button data-toggle="modal" data-target="#modalUpdate" class="submit-btn" >Edit</button>
+                        <button (click)="deleteParking(p.id)">Delete</button>
                       </td>
                     </tr> 
     
@@ -339,8 +340,8 @@
                         {{r.type}}
                       </td>
                       <td>
-                        <button data-toggle="modal" data-target="#modalUpdateRate" class="submit-btn" (click)="getRateById(r.id)">Edit</button>
-                        <button data-toggle="modal" data-target="#modalDeleteRate" class="submit-btn" (click)="deleteRate(r.id)">Delete</button>
+                        <button data-toggle="modal" data-target="#modalUpdateRate" class="submit-btn">Edit</button>
+                        <button class="submit-btn" (click)="deleteRate(r.id)">Delete</button>
                       </td>
                     </tr> 
     
@@ -366,6 +367,34 @@
               <p id="la">
                 In this section you can view, update and delete user roles in the system.
               </p>
+              <button data-toggle="modal" data-target="#modalAddRol">Add</button>  
+              <!-- Modal -->
+                       <div id="modalAddRol" class="modal fade" role="dialog">
+                         <div class="modal-dialog">
+   
+                           <!-- Modal content-->
+                           <div class="modal-content">
+                             <div class="modal-header">
+                               <button type="button" class="close" data-dismiss="modal">&times;</button>                            
+                             </div>
+                             <div class="modal-body">                             
+                                       <form action="">                                        
+                                        <div class=" w3l-form-group">
+                                          <label>Rol name:</label>
+                                          <div class="group">                  
+                                               <input [(ngModel)]="rolsData.name" type="text" name="name" id="nameAddRol" class="form-control" placeholder="Rol name">
+                                              </div>
+                                          </div>
+                                      
+                                       <button (click)="addRol()">Add</button>      
+                                       <button (click)="clearAddRol()">Cancel</button>        
+                                       <label class="result" id="result"></label>
+                                   </form>                                                              
+                             </div>
+                           </div>
+   
+                         </div>
+                       </div>
     
               <!-- Modal -->
                         <div id="modalUpdateRol" class="modal fade" role="dialog">
@@ -437,14 +466,139 @@
                         {{r.name}}
                       </td>
                       <td>
-                        <button data-toggle="modal" data-target="#modalUpdateRol" class="submit-btn" (click)="getRateById(r.id)">Edit</button>
-                        <button data-toggle="modal" data-target="#modalDeleteRate" class="submit-btn" (click)="deleteRate(r.id)">Delete</button>
+                        <button data-toggle="modal" data-target="#modalUpdateRol" class="submit-btn">Edit</button>
+                        <button class="submit-btn" (click)="deleteRol(r.id)">Delete</button>
                       </td>
                     </tr> 
     
                 </thead>
     
                 <tbody id="userroles-tbody">
+    
+                </tbody>
+    
+            </table>     
+          </div> 
+        
+        </div>
+      </section>
+
+      <section id="Users" class="slider_section ">
+        <div class="container">
+          <div class="detail-box col-md-9 mx-auto px-0">
+            <div class="heading_container">
+              <h1>
+                Clients List
+              </h1>
+              <p id="la">
+                In this section you can view the list of registered customers and manage them
+              </p>
+              <button data-toggle="modal" data-target="#modalAddUser">Add</button>  
+    
+               <!-- Modal -->
+                        <div id="modalAddUser" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>                            
+                              </div>  
+                              <div class="modal-body">                             
+                                        <form action="">                                        
+                                      <div class=" w3l-form-group">
+                                            <label>User:</label>
+                                            <div class="group">                  
+                                                 <input [(ngModel)]="userData.name" type="text" name="name" id="nameAddUser" class="form-control" placeholder="User" required="">
+                                            </div>
+                                        </div>
+                                        <div class=" w3l-form-group">
+                                            <label>Email:</label>
+                                            <div class="group">                  
+                                                <input [(ngModel)]="userData.email" type="text" name="city" id="emailAddUser" class="form-control" placeholder="Email" required="">
+                                            </div>
+                                        </div>
+                                        <div class=" w3l-form-group">
+                                            <label>Password:</label>
+                                            <div class="group">                  
+                                                <input [(ngModel)]="userData.password" type="password" name="city" id="passwordAddUser" class="form-control" placeholder="Password" required="">
+                                            </div>
+                                        </div>
+                                       
+                                        <button (click)="addUser()">Add</button>      
+                                        <button (click)="clearAddUser()">Cancel</button>        
+                                        <label class="result" id="resultAddUser"></label>
+                                    </form>                                                              
+                              </div>
+                            </div>
+    
+                          </div>
+                        </div>
+    
+                         <!-- Modal -->
+                        <div id="modalDeleteClientAssistant" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+    
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>                           
+                              </div>
+                              <div class="modal-body">                                                                     
+                                        <label style="color:white;" id="deleteMessage">Delete client? Non-reversible action</label> 
+                                        <div id="modalDC">
+                                        </div>                            
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+    
+            </div>
+          </div>
+    
+          <div id="Users" class="container">
+            <table class="table table-bordered table-hover" id="users-table">
+                                    
+                <thead>
+    
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+    
+                        <th>
+                            User
+                        </th>
+    
+                        <th>
+                            Email
+                        </th>                                              
+    
+                        <th>
+                            Action
+                        </th>
+    
+                    </tr>
+
+                    <tr *ngFor="let u of users; let i=index;">
+                      <td>
+                        {{u.id}}
+                      </td>
+                      <td>
+                        {{u.name}}
+                      </td>
+                      <td>
+                        {{u.email}}
+                      </td>
+                      <td>
+                        <button data-toggle="modal" data-target="#modalUpdateRol" class="submit-btn">Edit</button>
+                        <button class="submit-btn" (click)="deleteUser(u.id)">Delete</button>
+                      </td>
+                    </tr> 
+    
+                </thead>
+    
+                <tbody id="users-tbody">
     
                 </tbody>
     

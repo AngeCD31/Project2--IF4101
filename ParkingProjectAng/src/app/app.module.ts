@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
 import * as $ from 'jquery';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,6 +55,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatCardModule,
+    MatGridListModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

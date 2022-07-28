@@ -19,7 +19,14 @@ export class AdminPrincipalComponent implements OnInit {
   rates:any=[];
   vehicles:any=[];
   rate:any;
+  users:any=[];
+
+  @Input() parkingData = {name:'',city:'',capacity:0,availableSpace:0,occupiedSpace:0};
+  @Input() rolsData = {name:''};
   @Input() rateData = {type:'', amount:0};
+  @Input() spotData = {parkingId:0, number:0, preferential:'', available:'', rateId:0};
+  @Input() vehicleData = {name:'',color:'',type:'',clientId:0}
+  @Input() userData = {name:'',email:'',password:'',rolId:0}
 
   constructor(public rest: ParkingService, 
               public rest2: UserService,
@@ -35,6 +42,7 @@ export class AdminPrincipalComponent implements OnInit {
     this.getRates();
     this.getVehicles();
     this.setTypesRate();
+    this.getUsers();
   }
 
   loginOut(){
@@ -63,6 +71,27 @@ export class AdminPrincipalComponent implements OnInit {
         console.log(data);
         this.vehicles = data;
     });
+  }
+
+  getUsers(){
+    this.users  = [];
+    this.rest2.get().subscribe((data:{}) => {
+        console.log(data);
+        this.users = data;
+    });
+  }
+
+  clearAddParking(){
+    $('#cityAddParking').val('');
+    $('#capacityAddParking').val('');
+    $('#availableSpaceAddParking').val('');
+    $('#occupiedSpaceAddParking').val('');
+  }
+  
+  clearAddUser(){
+    $('#nameAddUser').val('');    
+    $('#emailAddUser').val('');
+    $('#passwordAddUser').val('');
   }
 
   setTypesRate(){
@@ -123,6 +152,72 @@ export class AdminPrincipalComponent implements OnInit {
           this.ngOnInit();
   
         })
+      }
+
+      addParking(){
+        this.rest.add(this.parkingData).subscribe((result) => {
+          this.ngOnInit();
+        }, (err) => {
+          console.log(err);
+        });
+      }
+  
+      addVehicle(){
+        this.rest3.add(this.vehicleData).subscribe((result) => {
+          this.ngOnInit();
+        }, (err) => {
+          console.log(err);
+        });
+      }
+  
+      deleteParking(id:any){
+        this.rest.delete(id).subscribe( 
+          (data) =>{
+            console.log("click");
+    
+            this.ngOnInit();
+    
+          })
+      }
+      
+      deleteVehicle(id:any){
+        this.rest3.delete(id).subscribe( 
+          (data) =>{
+            console.log("click");
+    
+            this.ngOnInit();
+    
+          })
+      }
+
+      addUser(){
+        this.rest2.add(this.userData).subscribe((result) => {
+          this.ngOnInit();
+        }, (err) => {
+          console.log(err);
+        });
+      }
+  
+      addRol(){
+        this.rest4.add(this.rolsData).subscribe((result) => {
+          this.ngOnInit();
+        }, (err) => {
+          console.log(err);
+        });
+      }
+  
+      deleteUser(id:any){
+        this.rest2.delete(id).subscribe( 
+          (data) =>{
+            console.log("click");
+    
+            this.ngOnInit();
+    
+          })
+      }
+
+      clearAddRol(){
+        $('#nameAddRol').val('');     
       }
 
 }

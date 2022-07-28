@@ -14,19 +14,15 @@ public class Reservation {
     private int userId;
     private int spotId;
     private String date;
-    private String checkinTime;
-    private String checkoutTime;
     private int vehicleId;
     private float totalRate;
 
-    public Reservation(int id, int parkingId, int userId, int spotId, String date, String checkinTime, String checkoutTime, int vehicleId, float totalRate) {
+    public Reservation(int id, int parkingId, int userId, int spotId, String date, String rateType, int vehicleId, float totalRate) {
         this.Id = id;
         this.parkingId = parkingId;
         this.userId = userId;
         this.spotId = spotId;
         this.date = date;
-        this.checkinTime = checkinTime;
-        this.checkoutTime = checkoutTime;
         this.vehicleId = vehicleId;
         this.totalRate = totalRate;
     }
@@ -34,6 +30,8 @@ public class Reservation {
     public Reservation() {
 
     }
+
+
 
     public int getId() {
         return Id;
@@ -58,14 +56,6 @@ public class Reservation {
     public String getDate() {return date;}
 
     public void setDate(String date) {this.date = date;}
-
-    public String getCheckinTime() {return checkinTime;}
-
-    public void setCheckinTime(String checkinTime) {this.checkinTime = checkinTime;}
-
-    public String getCheckoutTime() {return checkoutTime;}
-
-    public void setCheckoutTime(String checkoutTime) {this.checkoutTime = checkoutTime;}
 
     public int getVehicleId() {return vehicleId;}
 

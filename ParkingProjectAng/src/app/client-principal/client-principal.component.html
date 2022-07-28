@@ -103,24 +103,33 @@
                           <!-- Modal content-->
                           <div class="modal-content">
                             <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>                         
+                              <button type="button" class="close" data-dismiss="modal" (click)="deselectSpot()">&times;</button>                         
                             </div>
-                            <div class="modal-body">
-                                <p style="color:red">Ocupado</p>
-                                <p style="color:green">Libre</p>
-                                <p style="color:Blue">Preferencial</p>
-                                <p style="color:white">Seleccionado</p>
-                                <table class="table table-bordered table-hover" id="spots-table">
-                                  
-                                 
-  
-                                  <tbody id="spots-tbody">
-  
-                                  </tbody>
-  
-                              </table>   
+                            <div class="modal-body" style="overflow: scroll;">
+                              <mat-grid-list cols="2" rowHeight="2:1">
+                                <mat-grid-tile>
+                                  <mat-card style="background-color:red;"><p >Ocupado</p></mat-card>
+                                </mat-grid-tile>
+                                <mat-grid-tile>
+                                  <mat-card style="background-color:green;"><p>Libre</p></mat-card>
+                                </mat-grid-tile>
+                                <mat-grid-tile>
+                                  <mat-card style="background-color:Blue;"><p >Preferencial</p></mat-card>
+                                </mat-grid-tile>
+                                <mat-grid-tile>
+                                  <mat-card style="background-color:white;"><p style="color: black;">Seleccionado</p></mat-card>
+                                </mat-grid-tile>
+                              </mat-grid-list>
+                    
+                              <div style="margin: 8px; background-color: blanchedalmond; border-radius: 8px;">
+                                <div *ngFor="let s of spots">
+                                  <button *ngIf="s.available==='Yes' && s.preferential==='Yes'" id={{s.id}}  style="background-color:blue; margin: 4px; width: 460px;" (click)="saveSpot(s.id)">{{s.id}}</button>
+                                  <button *ngIf="s.available==='Yes' && s.preferential==='No'" id={{s.id}}  style="background-color:green; margin: 4px; width: 460px;" (click)="saveSpot(s.id)">{{s.id}}</button>
+                                  <button *ngIf="s.available==='No'" id={{s.id}}  style="background-color:red; margin: 4px; width: 460px;">{{s.id}}</button>
+                                </div>
+                              </div>
                               
-                              <button data-toggle="modal" data-target="#modalGetSpot">Get Spot</button>
+                              <button id="getSpotButton" data-toggle="modal" data-target="#modalGetSpot" style="margin: 4px;">Get Spot</button>
   
                             </div>
                           </div>
@@ -142,32 +151,24 @@
                                     <div class=" w3l-form-group">
                                           <label>Vehículo:</label>
                                           <div class="group">                  
-                                               <select id="vehicles" class="form-control" style="display: block;">
-                                                  
+                                               <select [(ngModel)]="reservation.vehicleId" name="vehicle" id="vehicles" class="form-control" style="display: block;">
+                                                <option *ngFor="let v of vehicles" value={{v.id}}>{{v.name}}</option>
                                                </select>
                                           </div>
                                       </div>
                                       <div class=" w3l-form-group">
                                           <label>Fecha:</label>
                                           <div class="group">                  
-                                              <input id="date" type="date" class="form-control" required="" />
+                                              <input [(ngModel)]="reservation.date" name="date" id="date" type="date" class="form-control" required="" />
                                           </div>
                                       </div>
                                       <div class=" w3l-form-group">
-                                          <label>Hora de entrada:</label>
-                                          <div class="group">                  
-                                              <input id="checkintime" type="time" class="form-control" required="" />
-                                          </div>
-                                      </div>
-                                      <div class=" w3l-form-group">
-                                          <label>Hora de salida:</label>
-                                          <div class="group">                  
-                                              <input id="checkouttime" type="time" class="form-control" required="" />
-                                          </div>
-                                      </div>
-                                      
-                                      <button onclick="GetTotalRate();return false">Total</button>
-                                      <button onclick="SaveBooking();return false">Save Booking</button>                                  
+                                          <label>Período:</label>
+                                          <select [(ngModel)]="reservation.totalRate" name="rate" id="rates" class="form-control" style="display: block;">
+                                            <option *ngFor="let r of rates" value={{r.amount}}>{{r.type}} - {{r.amount}}</option>
+                                           </select>
+                                      </div>                                                       
+                                      <button (click)="saveBooking()">Save Booking</button>                                  
                                       <label class="result" id="result"></label>
                                   </form>                                                    
                             </div>
@@ -205,10 +206,7 @@
                                                 Date
                                             </th> 
                                             <th>
-                                                Check In Time
-                                            </th>  
-                                            <th>
-                                                Check Out Time
+                                                Amount
                                             </th>  
                                             <th>
                                                 Action
@@ -220,28 +218,22 @@
                                                 {{b.id}}
                                               </td>
                                               <td>
-                                                {{b.parking.name}}
+                                                {{b.parkingId}}
                                               </td>
                                               <td>
-                                                {{b.spot.number}}
+                                                {{b.spotId}}
                                               </td>
                                               <td>
                                                 {{b.date}}
                                               </td>
                                               <td>
-                                                {{b.checkinTime}}
+                                                {{b.totalRate}}
                                               </td>
                                               <td>
-                                                {{b.checkoutTime}}
-                                              </td>
-                                              <td>
-                                                <button data-toggle="modal" data-target="#modalUpdateBookings" class="submit-btn" (click)="getSpots(b.id)">Edit</button>
-                                                <button data-toggle="modal" data-target="#modalDeleteBooking" class="submit-btn" (click)="getSpots(b.id)">Delete</button>
+                                                <button data-toggle="modal" data-target="#modalUpdateBookings" class="submit-btn">Edit</button>
+                                                <button data-toggle="modal" class="submit-btn" (click)="deleteBooking(b.id)">Delete</button>
                                               </td>
                                             </tr> 
-    
-                                        
-    
                                     </thead>
     
                                     <tbody id="bookings-tbody">
@@ -296,24 +288,6 @@
                               </div>
                             </div>
     
-                          </div>
-                        </div>
-    
-                         <!-- Modal -->
-                        <div id="modalDeleteBooking" class="modal fade" role="dialog">
-                          <div class="modal-dialog">
-    
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>                           
-                              </div>
-                              <div class="modal-body">                                                                     
-                                        <label style="color:white" id="deleteMessage">Delete booking? Non-reversible action</label> 
-                                        <div id="modalD">
-                                        </div>                            
-                              </div>
-                            </div>
                           </div>
                         </div>
               </div> 
